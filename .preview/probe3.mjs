@@ -1,0 +1,40 @@
+﻿import { spawn } from "node:child_process";
+import path from "node:path";
+const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+const PORT = 9334;
+const PROFILE = path.resolve(".preview/cdp-probe3");
+const BASE = "http://localhost:3111";
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+const chrome = spawn(CHROME, ["--headless=old","--no-sandbox","--disable-gpu","--disable-software-rasterizer","--disable-dev-shm-usage","--hide-scrollbars","--no-first-run",`--remote-debugging-port=${PORT}`,`--user-data-dir=${PROFILE}`,"about:blank"],{stdio:"ignore"});
+for (let i=0;i<80;i++){ try{ if((await fetch(`http://127.0.0.1:${PORT}/json/version`)).ok) break; }catch{} await sleep(250); }
+const targets = await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();
+const page = targets.find(t=>t.type==="page");
+const socket = new WebSocket(page.webSocketDebuggerUrl);
+await new Promise((res,rej)=>{socket.addEventListener("open",res,{once:true});socket.addEventListener("error",rej,{once:true});});
+const pending = new Map(); let id=0;
+socket.addEventListener("message",e=>{const m=JSON.parse(e.data); if(m.id&&pending.has(m.id)){pending.get(m.id)(m.result??m.error);pending.delete(m.id);}});
+const send=(method,params={})=>{id++;const c=id;return new Promise(res=>{pending.set(c,res);socket.send(JSON.stringify({id:c,method,params}));});};
+await send("Page.enable"); await send("Runtime.enable");
+await send("Emulation.setDeviceMetricsOverride",{width:1600,height:1000,deviceScaleFactor:1,mobile:false});
+await send("Page.navigate",{url:BASE});
+await sleep(3500);
+await send("Runtime.evaluate",{expression:"try{sessionStorage.setItem('cezar-intro','1')}catch(e){}"});
+await send("Page.navigate",{url:BASE});
+await sleep(4500);
+await send("Runtime.evaluate",{expression:"document.querySelector('#collections')?.scrollIntoView({block:'start'});"});
+await sleep(4500);
+const expr = `(()=>{
+  const img = document.querySelector('img[src*="cezar-burgundy-model"]');
+  if(!img) return 'no img';
+  const r = img.getBoundingClientRect();
+  const cx = Math.round(r.left + r.width/2), cy = Math.round(r.top + r.height/2);
+  const cs = getComputedStyle(img);
+  const stack = document.elementsFromPoint(cx, cy).slice(0,8).map(el=>{
+    const s = getComputedStyle(el);
+    return el.tagName+'.'+(el.className&&el.className.baseVal!==undefined?el.className.baseVal:el.className||'').toString().slice(0,60)+' | op:'+s.opacity+' tf:'+s.transform.slice(0,40)+' ts:'+s.transformStyle+' filt:'+s.filter;
+  });
+  return JSON.stringify({rect:{x:r.x,y:r.y,w:r.width,h:r.height}, cx, cy, currentSrc:img.currentSrc, natural:[img.naturalWidth,img.naturalHeight], complete:img.complete, imgCS:{opacity:cs.opacity,visibility:cs.visibility,filter:cs.filter,transform:cs.transform,objectFit:cs.objectFit,zIndex:cs.zIndex,position:cs.position,mixBlendMode:cs.mixBlendMode}, stack}, null, 2);
+})()`;
+const out = await send("Runtime.evaluate",{expression:expr, returnByValue:true});
+process.stdout.write((out?.result?.value ?? JSON.stringify(out))+"\n");
+socket.close(); chrome.kill();

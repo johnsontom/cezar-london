@@ -1,0 +1,36 @@
+{
+  "name": "cezar-london",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CEZAR LONDON - luxury activewear and contemporary lifestyle clothing.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.1",
+    "framer-motion": "^13.5.0",
+    "gsap": "^3.15.0",
+    "lucide-react": "^1.49.0",
+    "next": "^15.5.27",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "sharp": "^0.35.5",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^6.0.3"
+  }
+}
