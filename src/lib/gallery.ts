@@ -64,6 +64,22 @@ export const gallery: GalleryItem[] = [
     weight: "tall",
   },
   {
+     id: "night-Black",
+    ...images.nightBlack,
+    caption: "Clock it",
+    location: "Campaign Set ",
+    orientation: "portrait",
+    weight: "tall",
+  },
+  {
+     id: "group-Black",
+    ...images.groupBlack,
+    caption: "Group capri set",
+    location: "Campaign Set Group",
+    orientation: "portrait",
+    weight: "tall",
+  },
+  {
     id: "car-group",
     ...images.carGroup,
     caption: "Night drive",

@@ -17,16 +17,16 @@ export const site = {
   url: "https://www.cezarlondon.com",
 
   contact: {
-    email: "hello@cezarlondon.com",
-    businessEmail: "studio@cezarlondon.com",
-    whatsappLabel: "+44 0000 000000",
-    whatsappUrl: "https://wa.me/440000000000",
+    email: "cezarshopifymail@gmail.com",
+    businessEmail: "cezarshopifymail@gmail.com",
+    // whatsappLabel: "+44 0000 000000",
+    // whatsappUrl: "https://wa.me/440000000000",
     location: "London, United Kingdom",
   },
 
   social: {
-    instagram: "https://www.instagram.com/cezarlondon",
-    tiktok: "https://www.tiktok.com/@cezarlondon",
+    instagram: "https://www.instagram.com/cezarclothing",
+    tiktok: "https://www.tiktok.com/@cezarclothing",
   },
 
   /** Shown wherever product data is still placeholder content. */

@@ -122,6 +122,18 @@ export const images = {
     878,
     1560,
   ),
+  nightBlack: make(
+    "/images/Black.jpeg",
+    "Two CEZAR LONDON models on a city balcony at night wearing blush and red Cezar Capri Sets",
+    878,
+    1560,
+  ),
+  groupBlack: make(
+    "/images/IMG_3206.jpeg",
+    "Two CEZAR LONDON models on a city balcony at night wearing blush and red Cezar Capri Sets",
+    878,
+    1560,
+  ),
   nightRooftop: make(
     "/images/cezar-night-rooftop.jpg",
     "Three CEZAR LONDON models on a rooftop at night against the city skyline in blush and pale blue Cezar Capri Sets",

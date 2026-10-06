@@ -127,7 +127,45 @@ export function CampaignSection() {
             </Link>
           </div>
 
-          <div className="lg:col-span-4 lg:col-start-9">
+<div className="lg:col-span-4 lg:col-start-1">
+  <div ref={insetRef} className="relative aspect-[3/4] w-full will-change-transform">
+    <TiltFrame className="absolute inset-0" intensity={4}>
+      <div className="relative h-full w-full overflow-hidden bg-ink-800">
+        <SmartImage
+          asset={images.groupBlack}
+          sizes="(min-width: 1024px) 32vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+    </TiltFrame>
+  </div>
+
+  <p className="eyebrow mt-5 text-[9px] text-ivory/35">
+    Campaign set Group — London, after dark
+  </p>
+</div>
+
+
+
+<div className="lg:col-span-4 lg:col-start-5">
+  <div ref={insetRef} className="relative aspect-[3/4] w-full will-change-transform">
+    <TiltFrame className="absolute inset-0" intensity={4}>
+      <div className="relative h-full w-full overflow-hidden bg-ink-800">
+        <SmartImage
+          asset={images.nightBlack}
+          sizes="(min-width: 1024px) 32vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+    </TiltFrame>
+  </div>
+
+  <p className="eyebrow mt-5 text-[9px] text-ivory/35">
+    Campaign set II — London, after dark
+  </p>
+</div>
+
+<div className="lg:col-span-4 lg:col-start-9">
             <div ref={insetRef} className="relative aspect-[3/4] w-full will-change-transform">
               <TiltFrame className="absolute inset-0" intensity={4}>
                 <div className="relative h-full w-full overflow-hidden bg-ink-800">
@@ -143,6 +181,7 @@ export function CampaignSection() {
               Campaign set II — London, after dark
             </p>
           </div>
+
         </div>
       </div>
     </section>
