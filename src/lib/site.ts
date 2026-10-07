@@ -19,8 +19,8 @@ export const site = {
   contact: {
     email: "cezarshopifymail@gmail.com",
     businessEmail: "cezarshopifymail@gmail.com",
-    // whatsappLabel: "+44 0000 000000",
-    // whatsappUrl: "https://wa.me/440000000000",
+    whatsappLabel: "+44 0000 000000",
+    whatsappUrl: "https://wa.me/44xxxxxxxxxxxx",
     location: "London, United Kingdom",
   },
 
